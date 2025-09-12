@@ -34,6 +34,7 @@ BEGIN
 		WITH (
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
+			CODEPAGE = '65001', 
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
