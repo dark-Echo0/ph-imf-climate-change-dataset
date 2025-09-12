@@ -11,6 +11,10 @@ WARNING:
     Running this script will drop the entire 'PHClimateChangeDataset' database if it exists. 
     All data in the database will be permanently deleted. Proceed with caution 
     and ensure you have proper backups before running this script.
+
+After running this script. Go to SQL Server then import the dataset.
+Right Click  the Database Name >> Task >> Import flat file.
+Then, locate the path of the file  >> Create the name of the Database >> Select the 'bronze' schema >> Create column name.
 */
 
 USE master;
