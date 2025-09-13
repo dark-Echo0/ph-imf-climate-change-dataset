@@ -13,6 +13,9 @@ Parameters:
     This stored procedure does not accept any parameter or return any values.
 
 Before running this script make sure the '.csv' file format was converted to '.txt' format.
+Then, I add current stamptime of this table in the last column by running this script:
+		ALTER TABLE bronze.ghg_co2_emissions
+		ADD dwh_create_date DATETIME2 NOT NULL DEFAULT GETDATE();
 
 Usage Example:
     EXEC bronze.load_bronze;   
@@ -38,7 +41,6 @@ BEGIN
 		WITH (
 			FIRSTROW = 2,
 			FIELDTERMINATOR = '\t',
-			DATAFILETYPE = 'widechar',
 			CODEPAGE = '65001',
 			TABLOCK
 		);
