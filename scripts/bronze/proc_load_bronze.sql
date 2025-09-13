@@ -32,6 +32,7 @@ BEGIN
 		PRINT 'Loading Bronze Layer';
 		PRINT '==============================================';
 
+		-- Create bronze.ghg_co2_emissions
 		SET @start_time = GETDATE();
 		PRINT '>> Truncating Table: bronze.ghg_co2_emissions';
 		TRUNCATE TABLE bronze.ghg_co2_emissions; 
@@ -48,6 +49,24 @@ BEGIN
 		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
 		PRINT '----------------------------------------------';
 
+		-- Create bronze.ghg_carbon_footprints
+		SET @start_time = GETDATE();
+		PRINT '>> Truncating Table: bronze.ghg_carbon_footprints';
+		TRUNCATE TABLE bronze.ghg_carbon_footprints; 
+		PRINT '>> Insert Table: bronze.ghg_carbon_footprints';
+		BULK INSERT bronze.ghg_carbon_footprints
+		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\carbon_footprint.txt"
+		WITH (
+			FIRSTROW = 2,
+			FIELDTERMINATOR = '\t',
+			CODEPAGE = '65001',
+			TABLOCK
+		);
+		SET @end_time = GETDATE();
+		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
+		PRINT '----------------------------------------------';
+
+		--
 
 		SET @batch_end_time = GETDATE();
 		PRINT '==============================================';
