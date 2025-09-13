@@ -12,10 +12,14 @@ Parameters:
     None.
     This stored procedure does not accept any parameter or return any values.
 
+Before running this script make sure the '.csv' file format was converted to '.txt' format.
+
 Usage Example:
     EXEC bronze.load_bronze;   
 =================================================================
 */
+EXEC bronze.load_bronze
+
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME;
@@ -30,14 +34,12 @@ BEGIN
 		TRUNCATE TABLE bronze.ghg_co2_emissions; 
 		PRINT '>> Insert Table: bronze.ghg_co2_emissions';
 		BULK INSERT bronze.ghg_co2_emissions
-		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\04_CO2_Emissions_Emissions_Intensities_and_Emissions_Multipliers.csv"
+		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\co2_eim.txt"
 		WITH (
-			FORMAT = 'CSV',
 			FIRSTROW = 2,
-			FIELDTERMINATOR = ',',
-			ROWTERMINATOR = '\n',
-			DATAFILETYPE = 'char',
-			CODEPAGE = 'RAW', 
+			FIELDTERMINATOR = '\t',
+			DATAFILETYPE = 'widechar',
+			CODEPAGE = '65001',
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
