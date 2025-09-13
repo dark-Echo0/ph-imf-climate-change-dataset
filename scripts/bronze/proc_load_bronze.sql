@@ -26,11 +26,11 @@ BEGIN
 		PRINT '==============================================';
 
 		SET @start_time = GETDATE();
-		PRINT '>> Truncating Table: bronze.nat_inventory_target';
-		TRUNCATE TABLE bronze.nat_inventory_target; 
-		PRINT '>> Insert Table: bronze.nat_inventory_target';
-		BULK INSERT bronze.nat_inventory_target
-		FROM "C:\Users\ojoar\Desktop\data_set\ph_imf_climate_data\Philippines_PH_All_Indicators\03_nat_inventory_target.csv"
+		PRINT '>> Truncating Table: bronze.ghg_co2_emissions';
+		TRUNCATE TABLE bronze.ghg_co2_emissions; 
+		PRINT '>> Insert Table: bronze.ghg_co2_emissions';
+		BULK INSERT bronze.ghg_co2_emissions
+		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\04_CO2_Emissions_Emissions_Intensities_and_Emissions_Multipliers.csv"
 		WITH (
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
