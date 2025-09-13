@@ -10,7 +10,7 @@ Script Purpose:
 */
 
 GO
-
+-- Create 'bronze.ghg_co2_emissions' table
 IF OBJECT_ID('bronze.ghg_co2_emissions', 'U') IS NOT NUll
 	DROP TABLE bronze.ghg_co2_emissions; 
 GO
@@ -23,4 +23,21 @@ CREATE TABLE bronze.ghg_co2_emissions(
   
 );
 GO
+
+-- Create 'bronze.ghg_carbon_footprints' table
+IF OBJECT_ID('bronze.ghg_carbon_footprints', 'U') IS NOT NUll
+	DROP TABLE bronze.ghg_carbon_footprints; 
+GO
+  
+CREATE TABLE bronze.ghg_carbon_footprints(
+  country NVARCHAR(MAX),	iso2 NVARCHAR(MAX),	iso3 NVARCHAR(MAX),	indicator_used NVARCHAR(MAX), unit NVARCHAR(MAX), 
+  cts_code NVARCHAR(MAX),	cts_name NVARCHAR(MAX), cts_full_descriptor	NVARCHAR(MAX), industry NVARCHAR(MAX),	scale NVARCHAR(MAX),
+  [1995] NVARCHAR(MAX),	[1996] NVARCHAR(MAX),	[1997] NVARCHAR(MAX),	[1998] NVARCHAR(MAX),	[1999] NVARCHAR(MAX),	[2000] NVARCHAR(MAX),	[2001] NVARCHAR(MAX),	[2002] NVARCHAR(MAX),	[2003] NVARCHAR(MAX),	[2004] NVARCHAR(MAX),	[2005] NVARCHAR(MAX),	[2006] NVARCHAR(MAX),
+  [2007] NVARCHAR(MAX),	[2008] NVARCHAR(MAX),	[2009] NVARCHAR(MAX),	[2010] NVARCHAR(MAX),	[2011] NVARCHAR(MAX),	[2012] NVARCHAR(MAX),	[2013] NVARCHAR(MAX),	[2014] NVARCHAR(MAX),	[2015] NVARCHAR(MAX),	[2016] NVARCHAR(MAX),	[2017] NVARCHAR(MAX),	[2018] NVARCHAR(MAX),
+  [2019] NVARCHAR(MAX), [2020] NVARCHAR(MAX),   [2021] NVARCHAR(MAX)
+  
+  
+);
+
+
 
