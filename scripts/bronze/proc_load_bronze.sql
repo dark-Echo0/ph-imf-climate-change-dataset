@@ -32,9 +32,12 @@ BEGIN
 		BULK INSERT bronze.ghg_co2_emissions
 		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\04_CO2_Emissions_Emissions_Intensities_and_Emissions_Multipliers.csv"
 		WITH (
+			FORMAT = 'CSV',
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
-			CODEPAGE = '65001', 
+			ROWTERMINATOR = '\n',
+			DATAFILETYPE = 'char',
+			CODEPAGE = 'RAW', 
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
