@@ -17,7 +17,7 @@ Usage Example:
     EXEC silver.load_silver;
 =================================================================
 */
-CREATE OR ALTER PROCEDURE bronze.load_bronze AS
+CREATE OR ALTER PROCEDURE silver.load_silver AS
 BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME;
 	BEGIN TRY
@@ -91,7 +91,7 @@ BEGIN
 		TRUNCATE TABLE silver.ghg_investment_related;
 		PRINT '>> Inserting Data Into: silver.ghg_investment_related';
 		INSERT INTO silver.ghg_investment_related(
-		country, iso_2, iso_3, indicator, unit, cts_code, sector	
+		country, iso_2, iso_3, indicator, unit, cts_code, sector,	
 		[2005], [2006], [2007], [2008], [2009], [2010], [2011], [2012], [2013], [2014],	
 		[2015], [2016]
 		)
@@ -106,8 +106,6 @@ BEGIN
 	    CAST([2005] AS FLOAT) AS [2005],	CAST([2006] AS FLOAT) AS [2006],    CAST([2007] AS FLOAT) AS [2007],	CAST([2008] AS FLOAT) AS [2008],	
 	    CAST([2009] AS FLOAT) AS [2010],	CAST([2010] AS FLOAT) AS [2010],	CAST([2011] AS FLOAT) AS [2011],	CAST([2012] AS FLOAT) AS [2012],	
 	    CAST([2013] AS FLOAT) AS [2013],	CAST([2014] AS FLOAT) AS [2014],	CAST([2015] AS FLOAT) AS [2015],	CAST(TRIM(REPLACE([2016], ',','')) AS FLOAT) AS [2016]
-	
-		FROM bronze.ghg_investment_related;
 		FROM silver.ghg_investment_related;
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
@@ -131,8 +129,6 @@ BEGIN
 
 	END CATCH
 END
-
-
 
 
 
