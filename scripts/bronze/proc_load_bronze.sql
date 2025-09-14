@@ -21,8 +21,6 @@ Usage Example:
     EXEC bronze.load_bronze;   
 =================================================================
 */
-EXEC bronze.load_bronze
-
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME;
@@ -38,11 +36,13 @@ BEGIN
 		TRUNCATE TABLE bronze.ghg_co2_emissions; 
 		PRINT '>> Insert Table: bronze.ghg_co2_emissions';
 		BULK INSERT bronze.ghg_co2_emissions
-		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\co2_eim.txt"
+		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\04_CO2_Emissions_Emissions_Intensities_and_Emissions_Multipliers.csv"
 		WITH (
 			FIRSTROW = 2,
-			FIELDTERMINATOR = '\t',
+			FIELDTERMINATOR = ',',
+			ROWTERMINATOR = '\n',
 			CODEPAGE = '65001',
+			KEEPNULLS,
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
@@ -55,11 +55,13 @@ BEGIN
 		TRUNCATE TABLE bronze.ghg_carbon_footprints; 
 		PRINT '>> Insert Table: bronze.ghg_carbon_footprints';
 		BULK INSERT bronze.ghg_carbon_footprints
-		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\carbon_footprint.txt"
+		FROM 'C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\05_CO2_Emissions_embodied_in_Domestic_Final_Demand_Production_and_Trade.csv'
 		WITH (
 			FIRSTROW = 2,
-			FIELDTERMINATOR = '\t',
+			FIELDTERMINATOR = ',',
+			ROWTERMINATOR = '\n',
 			CODEPAGE = '65001',
+			KEEPNULLS,
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
