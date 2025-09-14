@@ -21,7 +21,7 @@ Usage Example:
     EXEC bronze.load_bronze;   
 =================================================================
 */
-CREATE OR ALTER PROCEDURE bronze.load_bronze AS
+CREATE OR ALTER PROCEDURE bronze.load_bronze_ghg AS
 BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME;
 	BEGIN TRY
@@ -36,7 +36,7 @@ BEGIN
 		TRUNCATE TABLE bronze.ghg_co2_emissions; 
 		PRINT '>> Insert Table: bronze.ghg_co2_emissions';
 		BULK INSERT bronze.ghg_co2_emissions
-		FROM "C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\04_CO2_Emissions_Emissions_Intensities_and_Emissions_Multipliers.csv"
+		FROM 'C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\04_CO2_Emissions_Emissions_Intensities_and_Emissions_Multipliers.csv'
 		WITH (
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
@@ -68,7 +68,30 @@ BEGIN
 		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
 		PRINT '----------------------------------------------';
 
-		--
+		-- Create 'bronze.ghg_investment_related' 
+		SET @start_time = GETDATE();
+		PRINT '>> Truncating Table: bronze.ghg_investment_related';
+		TRUNCATE TABLE bronze.ghg_investment_related; 
+		PRINT '>> Insert Table: bronze.ghg_investment_related';
+		BULK INSERT bronze.ghg_investment_related
+		FROM 'C:\Users\ojoar\Desktop\PH_All_Indicators\ghg\06_Direct_Investment-related_Indicators.csv'
+		WITH (
+			FIRSTROW = 2,
+			FIELDTERMINATOR = ',',
+			ROWTERMINATOR = '\n',
+			CODEPAGE = '65001',
+			KEEPNULLS,
+			TABLOCK
+		);
+		SET @end_time = GETDATE();
+		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
+		PRINT '----------------------------------------------';
+
+
+
+
+
+
 
 		SET @batch_end_time = GETDATE();
 		PRINT '==============================================';
