@@ -32,7 +32,7 @@ BEGIN
 		TRUNCATE TABLE silver.ghg_co2_emissions;
 		PRINT '>> Inserting Data Into: silver.ghg_co2_emissions';
 		INSERT INTO silver.ghg_co2_emissions(
-		country, iso_2, iso_3, indicator, unit, cts_code, industry,	
+		country, iso2, iso3, indicator_used, unit, cts_code, industry,	
     	[1995], [1996], [1997], [1998], [1999],	[2000], [2001], [2002], [2003], [2004],
 		[2005], [2006], [2007], [2008], [2009], [2010], [2011], [2012], [2013], [2014],	
 		[2015], [2016], [2017], [2018]
@@ -62,10 +62,10 @@ BEGIN
 		TRUNCATE TABLE silver.ghg_carbon_footprints;
 		PRINT '>> Inserting Data Into: silver.ghg_carbon_footprints';
 		INSERT INTO silver.ghg_carbon_footprints(
-		country, iso_2, iso_3, indicator, unit, cts_code,	
+		country, iso2, iso3, indicator_used, unit, cts_code,	
     	[1995], [1996], [1997], [1998], [1999],	[2000], [2001], [2002], [2003], [2004],
 		[2005], [2006], [2007], [2008], [2009], [2010], [2011], [2012], [2013], [2014],	
-		[2015], [2016], [2017], [2018]
+		[2015], [2016], [2017], [2018], [2019],[2020], [2021]
 		)
 	    SELECT 
 	    TRIM(country) AS country,
@@ -78,8 +78,8 @@ BEGIN
 	    CAST([2000] AS FLOAT) AS [2000],	CAST([2001] AS FLOAT) AS [2001],	CAST([2002] AS FLOAT) AS [2002],	CAST([2003] AS FLOAT) AS [2003],	CAST([2004] AS FLOAT) AS [2004],	
 	    CAST([2005] AS FLOAT) AS [2005],	CAST([2006] AS FLOAT) AS [2006],    CAST([2007] AS FLOAT) AS [2007],	CAST([2008] AS FLOAT) AS [2008],	CAST([2009] AS FLOAT) AS [2010],	
 	    CAST([2010] AS FLOAT) AS [2010],	CAST([2011] AS FLOAT) AS [2011],	CAST([2012] AS FLOAT) AS [2012],	CAST([2013] AS FLOAT) AS [2013],	CAST([2014] AS FLOAT) AS [2014],	
-	    CAST([2015] AS FLOAT) AS [2015],	CAST([2016] AS FLOAT) AS [2016],	CAST([2017] AS FLOAT) AS [2017],	CAST([2018] AS FLOAT) AS [2018]
-
+	    CAST([2015] AS FLOAT) AS [2015],	CAST([2016] AS FLOAT) AS [2016],	CAST([2017] AS FLOAT) AS [2017],	CAST([2018] AS FLOAT) AS [2018],	CAST([2019] AS FLOAT) AS [2019],
+		CAST([2020] AS FLOAT) AS [2020], CAST([2021] AS FLOAT) AS [2021]
 		FROM bronze.ghg_carbon_footprints;
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
@@ -91,7 +91,7 @@ BEGIN
 		TRUNCATE TABLE silver.ghg_investment_related;
 		PRINT '>> Inserting Data Into: silver.ghg_investment_related';
 		INSERT INTO silver.ghg_investment_related(
-		country, iso_2, iso_3, indicator, unit, cts_code, sector,	
+		country, iso2, iso3, indicator_used, unit, cts_code, sector,	
 		[2005], [2006], [2007], [2008], [2009], [2010], [2011], [2012], [2013], [2014],	
 		[2015], [2016]
 		)
@@ -129,8 +129,6 @@ BEGIN
 
 	END CATCH
 END
-
-
 
 
 
