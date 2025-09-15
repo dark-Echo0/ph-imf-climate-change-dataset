@@ -54,7 +54,13 @@ BEGIN
 	    CAST([2010] AS FLOAT) AS [2010],	CAST([2011] AS FLOAT) AS [2011],	CAST([2012] AS FLOAT) AS [2012],	CAST([2013] AS FLOAT) AS [2013],	CAST([2014] AS FLOAT) AS [2014],	
 	    CAST([2015] AS FLOAT) AS [2015],	CAST([2016] AS FLOAT) AS [2016],	CAST([2017] AS FLOAT) AS [2017],	CAST([2018] AS FLOAT) AS [2018]
 
-		FROM bronze.ghg_co2_emissions;
+		FROM bronze.ghg_co2_emissions
+		WHERE CAST([2005] AS FLOAT) != 0 AND
+			  CAST([2006] AS FLOAT) != 0 AND   
+			  CAST([2007] AS FLOAT) != 0 AND	
+			  CAST([2008] AS FLOAT) != 0 AND 	
+			  CAST([2009] AS FLOAT) != 0 AND	
+	          CAST([2010] AS FLOAT) != 0;
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
 		PRINT '----------------------------------------------';
@@ -83,7 +89,13 @@ BEGIN
 	    CAST([2010] AS FLOAT) AS [2010],	CAST([2011] AS FLOAT) AS [2011],	CAST([2012] AS FLOAT) AS [2012],	CAST([2013] AS FLOAT) AS [2013],	CAST([2014] AS FLOAT) AS [2014],	
 	    CAST([2015] AS FLOAT) AS [2015],	CAST([2016] AS FLOAT) AS [2016],	CAST([2017] AS FLOAT) AS [2017],	CAST([2018] AS FLOAT) AS [2018],	ISNULL(CAST([2019] AS FLOAT), 0) AS [2019],
 		ISNULL(CAST([2020] AS FLOAT),0) AS [2020], ISNULL(CAST([2021] AS FLOAT),0) AS [2021]
-		FROM bronze.ghg_carbon_footprints;
+		FROM bronze.ghg_carbon_footprints
+		WHERE CAST([2005] AS FLOAT) != 0 AND
+			  CAST([2006] AS FLOAT) != 0 AND   
+			  CAST([2007] AS FLOAT) != 0 AND	
+			  CAST([2008] AS FLOAT) != 0 AND 	
+			  CAST([2009] AS FLOAT) != 0 AND	
+	          CAST([2010] AS FLOAT) != 0;
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
 		PRINT '----------------------------------------------';
@@ -109,7 +121,13 @@ BEGIN
 	    CAST([2005] AS FLOAT) AS [2005],	CAST([2006] AS FLOAT) AS [2006],    CAST([2007] AS FLOAT) AS [2007],	CAST([2008] AS FLOAT) AS [2008],	
 	    CAST([2009] AS FLOAT) AS [2010],	CAST([2010] AS FLOAT) AS [2010],	CAST([2011] AS FLOAT) AS [2011],	CAST([2012] AS FLOAT) AS [2012],	
 	    CAST([2013] AS FLOAT) AS [2013],	CAST([2014] AS FLOAT) AS [2014],	CAST([2015] AS FLOAT) AS [2015],	CAST(TRIM(REPLACE([2016], ',','')) AS FLOAT) AS [2016]
-		FROM bronze.ghg_investment_related;
+		FROM bronze.ghg_investment_related
+		WHERE CAST([2005] AS FLOAT) != 0 AND
+			  CAST([2006] AS FLOAT) != 0 AND   
+			  CAST([2007] AS FLOAT) != 0 AND	
+			  CAST([2008] AS FLOAT) != 0 AND 	
+			  CAST([2009] AS FLOAT) != 0 AND	
+	          CAST([2010] AS FLOAT) != 0;
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST (DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' second';
 		PRINT '----------------------------------------------';
