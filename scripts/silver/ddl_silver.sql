@@ -10,40 +10,40 @@ Script Purpose:
 */
 -- create 'silver.ghg_co2_emissions' table
 IF OBJECT_ID('silver.ghg_co2_emissions', 'U') IS NOT NUll
-	DROP TABLE bronze.ghg_co2_emissions; 
-GO
+	DROP TABLE silver.ghg_co2_emissions; 
   
-CREATE TABLE silver.ghg_co2_emissions(
-  country NVARCHAR(MAX),	iso2 NVARCHAR(MAX),	iso3 NVARCHAR(MAX),	indicator_used NVARCHAR(MAX), unit NVARCHAR(MAX), 
-  cts_code NVARCHAR(MAX),	cts_name NVARCHAR(MAX), cts_full_descriptor	NVARCHAR(MAX), industry NVARCHAR(MAX),	scale NVARCHAR(MAX),
-  [1995] NVARCHAR(MAX),	[1996] NVARCHAR(MAX),	[1997] NVARCHAR(MAX),	[1998] NVARCHAR(MAX),	[1999] NVARCHAR(MAX),	[2000] NVARCHAR(MAX),	[2001] NVARCHAR(MAX),	[2002] NVARCHAR(MAX),	[2003] NVARCHAR(MAX),	[2004] NVARCHAR(MAX),	[2005] NVARCHAR(MAX),	[2006] NVARCHAR(MAX),
-  [2007] NVARCHAR(MAX),	[2008] NVARCHAR(MAX),	[2009] NVARCHAR(MAX),	[2010] NVARCHAR(MAX),	[2011] NVARCHAR(MAX),	[2012] NVARCHAR(MAX),	[2013] NVARCHAR(MAX),	[2014] NVARCHAR(MAX),	[2015] NVARCHAR(MAX),	[2016] NVARCHAR(MAX),	[2017] NVARCHAR(MAX),	[2018] NVARCHAR(MAX)
-);
+SELECT
+  country,	iso2,	iso3,	indicator_used, unit, 
+  cts_code,	industry,
+  [1995],	[1996],	[1997],	[1998],	[1999],	[2000],	[2001],	[2002],	[2003],	[2004],	[2005],	[2006],
+  [2007],	[2008],	[2009],	[2010],	[2011],	[2012],	[2013],	[2014],	[2015],	[2016],	[2017],	[2018]
+INTO silver.ghg_co2_emissions
+FROM bronze.ghg_co2_emissions
 GO
 
 -- Create 'silver.ghg_carbon_footprints' table
 IF OBJECT_ID('silver.ghg_carbon_footprints', 'U') IS NOT NUll
 	DROP TABLE silver.ghg_carbon_footprints; 
-GO
-  
-CREATE TABLE silver.ghg_carbon_footprints(
-  country NVARCHAR(MAX),	iso2 NVARCHAR(MAX),	iso3 NVARCHAR(MAX),	indicator_used NVARCHAR(MAX), 
-  unit NVARCHAR(MAX), cts_code NVARCHAR(MAX),	cts_name NVARCHAR(MAX),	scale NVARCHAR(MAX),
-  [1995] NVARCHAR(MAX),	[1996] NVARCHAR(MAX),	[1997] NVARCHAR(MAX),	[1998] NVARCHAR(MAX),	[1999] NVARCHAR(MAX),	[2000] NVARCHAR(MAX),	[2001] NVARCHAR(MAX),	[2002] NVARCHAR(MAX),	[2003] NVARCHAR(MAX),	[2004] NVARCHAR(MAX),	[2005] NVARCHAR(MAX),	[2006] NVARCHAR(MAX),
-  [2007] NVARCHAR(MAX),	[2008] NVARCHAR(MAX),	[2009] NVARCHAR(MAX),	[2010] NVARCHAR(MAX),	[2011] NVARCHAR(MAX),	[2012] NVARCHAR(MAX),	[2013] NVARCHAR(MAX),	[2014] NVARCHAR(MAX),	[2015] NVARCHAR(MAX),	[2016] NVARCHAR(MAX),	[2017] NVARCHAR(MAX),	[2018] NVARCHAR(MAX),
-  [2019] NVARCHAR(MAX), [2020] NVARCHAR(MAX),   [2021] NVARCHAR(MAX)
-);
+
+SELECT
+  country,	iso2,	iso3,	indicator_used, 
+  unit, cts_code,
+  [1995],	[1996],	[1997],	[1998],	[1999],	[2000],	[2001],	[2002],	[2003],	[2004],	[2005],	[2006],
+  [2007],	[2008],	[2009],	[2010],	[2011],	[2012],	[2013],	[2014],	[2015],	[2016],	[2017],	[2018],
+  [2019], [2020],   [2021]
+INTO silver.ghg_carbon_footprints
+FROM bronze.ghg_carbon_footprints
 
 -- Create 'silver.ghg_investment_related' table
 IF OBJECT_ID('silver.ghg_investment_related', 'U') IS NOT NUll
 	DROP TABLE silver.ghg_investment_related; 
-GO
   
-CREATE TABLE silver.ghg_investment_related(
-  country NVARCHAR(MAX),	iso2 NVARCHAR(MAX),	iso3 NVARCHAR(MAX),	indicator_used NVARCHAR(MAX), 
-  unit NVARCHAR(MAX), cts_code NVARCHAR(MAX),	cts_name NVARCHAR(MAX), sector NVARCHAR(MAX),	scale NVARCHAR(MAX),
-  [2005] NVARCHAR(MAX),	[2006] NVARCHAR(MAX), [2007] NVARCHAR(MAX),	[2008] NVARCHAR(MAX),	[2009] NVARCHAR(MAX), [2010] NVARCHAR(MAX),	
-  [2011] NVARCHAR(MAX),	[2012] NVARCHAR(MAX),	[2013] NVARCHAR(MAX),	[2014] NVARCHAR(MAX),	[2015] NVARCHAR(MAX),	[2016] NVARCHAR(MAX)
-);
+SELECT
+  country,	iso2,	iso3,	indicator_used, 
+  unit, cts_code, sector,	
+  [2005],	[2006], [2007],	[2008],	[2009], [2010],	
+  [2011],	[2012],	[2013],	[2014],	[2015],	[2016] 
+INTO silver.ghg_investment_related
+FROM bronze.ghg_investment_related
 
 --
